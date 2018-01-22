@@ -8,18 +8,32 @@ html, body {background: $body-bg;font-family: $font-noto;}
   background: $h-bg;
   color: #fff;
   .h1 {
-    display: inline-block;
+    display: block;
+    margin: 0;
+    padding: 0 100px 0 50px;
     font-size: 1.462rem;
     font-weight: 300;
+    line-height: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .btn {
-    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background: #eee;
+
+    &.btn-back {
+      position: absolute;
+      left: 7px;
+      top: 7px;
+    }
   }
   .optionWrap {
     position: absolute;
     height: 100%;
-    right: 0;
-    top: 0;
+    right: 7px;
+    top: 7px;
   }
 }
 .main {
