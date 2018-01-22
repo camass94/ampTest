@@ -53,6 +53,7 @@ app.use(sassMiddleWare({
     debug: true,
     indentedSyntax: false,
     sourceMap: true,
+    outputStyle: 'compressed',
     prefix: '/common/css'
 }));
 app.use(function(req, res, next) {

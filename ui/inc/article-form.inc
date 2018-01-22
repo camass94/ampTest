@@ -1,0 +1,35 @@
+    <article class="article info-building">
+        <header>
+            <h2 class="h2">건물정보</h2>
+        </header>
+        <div class="box box-white" data-id="18304" id="infoBuilding">
+        </div>
+    </article>
+    <script>
+        var getInfo = ampJS.getData('/common/data/items.json', function (d) {
+            var array = d.datas;
+            var datas = array.map(function(array) {
+                var obj = {};
+                obj[array.id] = array;
+                return obj;
+            });
+            return setInfoBuilding(datas);
+        });
+
+        var setInfoBuilding = function(datas) {
+            var _this = document.getElementById('infoBuilding')
+                ,_id = _this.dataset.id;
+            for (var i in datas) {
+                if(datas[i][_id] != undefined) {
+                    var d = datas[i][_id];
+                    var html= '<figure><img class="img" src="'+d.img+'" alt="'+d.name+' 전경 사진"></figure>'
+                            + '<ul><li class="name">'+d.name+'</li>'
+                            + '<li class="address">'+d.address1+' '+d.address2+' '+d.address3+'</li>'
+                            + '<li class="floor">'+d.floor+'</li>'
+                            + '<li class="rooms">'+d.rooms+'</li>'
+                            + '<li class="established">'+d.established+'</li></ul>'
+                    _this.innerHTML = html;
+                }
+            }
+        }
+    </script>
