@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>Hello, This is Sangmi's Work</title>
+    <link rel="amphtml" href="index.amp.html">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/app.js"></script>
+</head>
+<body>
+<header class="header">
+    <button type="button" title="이전 화면으로 돌아가기" class="btn btn-back"><i class="icon icon-back"></i></button>
+    <h1 class="h1">서울시 강남구 신사동</h1>
+    <div class="optionWrap">
+        <button type="button" title="SNS 공유하기" class="btn btn-share"><i class="icon icon-share"></i></button>
+        <button type="button" title="즐겨찾기" class="btn btn-favorite"><i class="icon icon-favorite"></i></button>
+    </div>
+</header>
+<main class="main">
+    <article class="carousel-wrap" id="carouselWrap">
+    <header class="visuallyhidden">
+        <h2>신사동 예쁜 쓰리룸</h2>
+    </header>
+    <div class="carousel-wrap-items">
+        <div class="item">
+            <img src="img/carousel1.jpg" alt="" draggable="false">
+        </div>
+        <div class="item">
+            <img src="img/carousel2.jpg" alt="" draggable="false">
+        </div>
+        <div class="item">
+            <img src="img/carousel3.jpg" alt="" draggable="false">
+        </div>
+        <div class="item">
+            <img src="img/carousel4.jpg" alt="" draggable="false">
+        </div>
+    </div>
+</article>
+
+<script>
+    ampJS.sliderJS.init('#carouselWrap');
+</script>
+    <header>
+        <h1 class="h1"><span class="label-safe">안심중개사<i>™</i></span> 가 등록한 방입니다.</h1>
+    </header>
+    <article class="article info-price">
+        <header>
+            <h2 class="h2 bold">신사동 예쁜 쓰리룸</h2>
+        </header>
+        <div class="box-white">
+        <dl class="dl-table price">
+            <dt>보증금</dt>
+            <dd><em>10000</em> 만원</dd>
+            <dt>월세</dt>
+            <dd><em>100</em> 만원</dd>
+            <dt>등록번호</dt>
+            <dd>1234567</dd>
+            <dd class="float">
+                <button type="button" title="실거래가 확인">실거래가 확인<span class="logo">한국감정원</span></button>
+            </dd>
+        </dl>
+        <dl class="dl-table">
+            <dt>주소</dt>
+            <dd>서울시 강남구 신사동</dd>
+            <dt>인근전철역</dt>
+            <dd>신사역(3호선) 압구정역(7호선)</dd>
+            <dt>층/건물층수</dt>
+            <dd>3층/4층</dd>
+            <dt>크기</dt>
+            <dd>전용면적 60.10㎡ 18.18P</dd>
+            <dt>구조</dt>
+            <dd>쓰리룸+</dd>
+            <dt>건물형태</dt>
+            <dd>다세대/다가구</dd>
+        </dl>
+        <dl class="dl-table">
+            <dt>옵션</dt>
+            <dd>옷장</dd>
+            <dt>관리비</dt>
+            <dd>없음</dd>
+            <dt>관리비 포함항목</dt>
+            <dd>수도</dd>
+            <dt>주차</dt>
+            <dd>불가능</dd>
+            <dt>엘레베이터</dt>
+            <dd>없음</dd>
+            <dt>입주가능일</dt>
+            <dd>4월21일 이후</dd>
+        </dl>
+        </div>
+    </article>
+    <article class="article info-description">
+        <header>
+            <h2 class="h2">상세설명</h2>
+        </header>
+        <div class="box box-white">
+            <p>거실과 방이 크게 나온 신사동 3룸 입니다 ^^
+                <br>남향집이고 해가 너무 잘들고 근처 건물둘에 비해서 집이 깨끗하고 뷰도 좋은 편입니다.
+                <br>가격은 집주인 분과 상의 후에 조정 가능합니다!!
+                <br>깔끔하고 좋은 집 보러 연락주세요!!
+            </p>
+        </div>
+    </article>
+    <article class="article">
+        <header>
+            <h2 class="h2">담당자 한마디</h2>
+        </header>
+        <div class="box box-white">
+            <p>공휴일 및 주말에도 언제든지 상담 가능
+                <br>차량 픽업 서비스 가능
+                <br>조건에 맞는 집 답사
+                <br>상담부터 계약까지 고객 맞춤형 서비스
+            </p>
+        </div>
+    </article>
+        <article class="article info-building">
+        <header>
+            <h2 class="h2">건물정보</h2>
+        </header>
+        <div class="box box-white" data-id="18304" id="infoBuilding">
+        </div>
+    </article>
+    <script>
+        var getInfo = ampJS.getData('/data/items.json', function (d) {
+            var array = d.datas;
+            var datas = array.map(function(array) {
+                var obj = {};
+                obj[array.id] = array;
+                return obj;
+            });
+            return setInfoBuilding(datas);
+        });
+
+        var setInfoBuilding = function(datas) {
+            var _this = document.getElementById('infoBuilding')
+                ,_id = _this.dataset.id;
+            for (var i in datas) {
+                if(datas[i][_id] != undefined) {
+                    var d = datas[i][_id];
+                    var html= '<figure><img class="img" src="'+d.img+'" alt="'+d.name+' 전경 사진"></figure>'
+                            + '<ul><li class="name">'+d.name+'</li>'
+                            + '<li class="address">'+d.address1+' '+d.address2+' '+d.address3+'</li>'
+                            + '<li class="floor">'+d.floor+'</li>'
+                            + '<li class="rooms">'+d.rooms+'</li>'
+                            + '<li class="established">'+d.established+'</li></ul>'
+                    _this.innerHTML = html;
+                }
+            }
+        }
+    </script>
+    <article class="article">
+    <header>
+        <h2 class="h2">위치보기</h2>
+    </header>
+    <div class="mapWrap box-white">
+        <div id="map"></div>
+        <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=73b02ca024e4f2933f03ff11aa5280c8"></script>
+        <script>
+            var markers = [
+                {
+                    position: new daum.maps.LatLng(37.54000696,126.9475155)
+                }
+            ];
+            var container = document.getElementById('map');
+            var options = {
+                center: new daum.maps.LatLng(37.53999696,126.9475155),
+                level: 3,
+                marker: markers
+            };
+
+            var map = new daum.maps.Map(container, options);
+        </script>
+    </div>
+</article>
+
+
+    <article class="article info-agent">
+        <header>
+            <h2 class="h2">중개사정보</h2>
+        </header>
+        <div class="box box-white">
+            <div class="top">
+                <figure>
+                    <img src="img/pic.jpg" alt="a profile picture">
+                    <figcaption><span class="label-safe">안심중개사<i>™</i></span></figcaption>
+                </figure>
+                <ul>
+                    <li>대표공인중개사 (이갑영)</li>
+                    <li>okok@naver.com</li>
+                    <li>010-1234-4567</li>
+                </ul>
+            </div>
+            <div class="bottom">
+                <h3>중개사무소 정보</h3>
+                <ul>
+                    <li>서울시 마포구, 테리 부동산 (김테리)</li>
+                    <li>대표번호 : 1588-1688</li>
+                </ul>
+            </div>
+        </div>
+    </article>
+</main>
+<footer class="footer">
+    <div class="box box-gray">
+        <p>이 방은 <strong>공인중개사가 등록한 중개 매물</strong>입니다.
+            <br>공인중개사를 통해 <strong>안전하게 계약</strong>할 수 있으며, <strong>법정 중개 보수가 발생</strong>합니다.</p>
+    </div>
+    <a href="tel:01052287825" class="box-call">
+        <p class="txt-s">우정공인중개사(김성훈)</p>
+        <p class="txt-l">중개보조원(한유진팀장)</p>
+        <p class="txt"><em class="tel">010-5228-7825</em> <span class="label">중개</span></p>
+        <span class="btn-call"><i class="icon icon-call"></i> 문의하기</span>
+    </a>
+</footer>
+</body>
+</html>
