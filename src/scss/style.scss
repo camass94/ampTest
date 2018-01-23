@@ -312,3 +312,23 @@ html, body {background: $body-bg;font-family: $font-noto;}
     }
   }
 }
+.overlayWrap {display: none;}
+body.activeOverlay {
+  height: 100vh;
+  overflow: hidden;
+  .carousel-wrap {z-index: 1;}
+  .overlayWrap {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.8);
+    display: table;
+    z-index: 1;
+    .overlay {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+}

@@ -32,6 +32,7 @@
                 dots: true,
                 arrow: false,
                 slick: true,
+                modal: false,
                 arrowClass: {
                     wrap: 'carousel-controller'
                     ,prev : 'btn-prev'
@@ -98,7 +99,7 @@
             if(_options.dots) {dots[idx].classList.add("active");}
             _options.initialSlide = idx;
         },
-        addClickEvent : function(event, el, fn) {
+        addEvents : function(event, el, fn) {
             var _this = this;
             if (window.addEventListener) {
                 el.addEventListener(event, fn, false); 
@@ -132,7 +133,7 @@
         if(_options.dots) {
             var dot = _this.el.querySelectorAll( ".dot" );
             for( var i = 0; i < _this.size; ++i ) {
-                _this.addClickEvent("click", dot[i], function(e) {
+                _this.addEvents("click", dot[i], function(e) {
                     _this.setActiceSlide(e.currentTarget.getAttribute("data-dot-index"));
                 });
             }
@@ -140,30 +141,29 @@
         if(_options.arrow) {
             var prev = _this.el.querySelector('.'+_options.arrowClass.prev);
             var next = _this.el.querySelector('.'+_options.arrowClass.next);
-            _this.addClickEvent("click", prev, function(e) {
+            _this.addEvents("click", prev, function(e) {
                     return _this.setActiceSlide(false);
                 });
-            _this.addClickEvent("click", next, function(e) {
+            _this.addEvents("click", next, function(e) {
                     return _this.setActiceSlide(true);
                 });
         }
+        var prevX, currentX, currentLeft, onslide;
+        _this.addEvents("mousedown", _this.wrapper[0], function(e) {
+            prevX = onslide = e.screenX;
+            currentLeft = parseInt(_this.wrapper[0].style.left)
+        });
         if(_options.slick) {
-            var prevX, currentX, currentLeft;
-            _this.wrapper[0].addEventListener("mousedown", function(e) {
-                prevX = e.screenX;
-                currentLeft = parseInt(_this.wrapper[0].style.left)
-            }, false);
-            _this.wrapper[0].addEventListener("mousemove", function(e) {
-                // _this.wrapper[0].style.width = _this.itemWrapWidth + 'px';
+            _this.addEvents("mousemove", _this.wrapper[0], function(e) {
                 if(prevX != undefined && prevX != null) {
                     _this.wrapper[0].style.left = currentLeft-(prevX-e.screenX) + 'px';
                 }
-            }, false);
-            _this.wrapper[0].addEventListener("mouseleave", function(e) {
+            });
+            _this.addEvents("mouseleave", _this.wrapper[0], function(e) {
                 _this.setActiceSlide();
                 prevX = null;
-            }, false);
-            _this.wrapper[0].addEventListener("mouseup", function(e) {
+            });
+            _this.addEvents("mouseup", _this.wrapper[0], function(e) {
                 currentX = e.screenX;
                 if(prevX>currentX) {
                     _this.setActiceSlide(true);
@@ -171,9 +171,24 @@
                     _this.setActiceSlide(false);
                 }
                 prevX = null;
-            }, false);
+            });
         }
-        window.addEventListener("resize", _this.runSlide);
+
+        if(_options.modal) {
+            _this.addEvents("click", _this.wrapper[0], function(e) {
+                if(onslide == e.screenX) {
+                    var imgHtml = '<img src="' + e.target.currentSrc + '" alt="">';
+                    //var html = '<div class="overlayWrap"><div class="overlay">'+imgHtml+'</div></div>';
+                    document.body.classList.add("activeOverlay");
+                    _this.el.querySelector('.overlay').innerHTML += imgHtml;
+                    _this.addEvents("click", _this.el.querySelector('.overlay'), function (e) {
+                        document.body.classList.remove("activeOverlay");
+                        _this.el.querySelector('.overlay').innerHTML = '';
+                    });
+                }
+            });
+        }
+        _this.addEvents("resize",window, _this.runSlide);
     });
     if (typeof ampJS == 'undefined') {
         window.ampJS = {};
