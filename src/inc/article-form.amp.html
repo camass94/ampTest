@@ -1,0 +1,28 @@
+    <article class="article info-building">
+        <header>
+            <h2 class="h2">건물정보</h2>
+        </header>
+        <amp-state id="infoBuilding" src="/common/data/items.json">
+        </amp-state>
+        <div class="box box-white">
+            <figure>
+                <amp-img 
+                    class="img"
+                    src="https://zigbang.s3-ap-northeast-1.amazonaws.com/public/buildings/18304.jpg"
+                    width="120"
+                    height="120"
+                    alt="고려 아카데미 텔 전경 사진">
+                </amp-img>
+            </figure>
+            <ul>
+                <li class="name" [text]="infoBuilding.datas[0]['name']">고려 아카데미 텔</li>
+                <li class="address" 
+                [text]="infoBuilding.datas[0]['address1'] + ' '
+                + infoBuilding.datas[0]['address2'] + ' '
+                + infoBuilding.datas[0]['address3']">서울시 마포구 아현동 437-3</li>
+                <li class="floor" [text]="infoBuilding.datas[0]['floor']">17층</li>
+                <li class="rooms" [text]="infoBuilding.datas[0]['rooms']">356세대</li>
+                <li class="established" [text]="infoBuilding.datas[0]['established']">1987.11</li>
+            </ul>
+        </div>
+    </article>

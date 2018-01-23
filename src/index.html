@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<!--#include virtual="/inc/head.inc" -->
+@@include('inc/head.html')
 <body>
 <header class="header">
     <button type="button" title="이전 화면으로 돌아가기" class="btn btn-back"><i class="icon icon-back"></i></button>
@@ -11,7 +11,7 @@
     </div>
 </header>
 <main class="main">
-<!--#include virtual="/inc/article-carousel.inc" -->
+    @@include('inc/article-carousel.html')
     <header>
         <h1 class="h1"><span class="label-safe">안심중개사<i>™</i></span> 가 등록한 방입니다.</h1>
     </header>
@@ -85,8 +85,8 @@
             </p>
         </div>
     </article>
-    <!--#include virtual="/inc/article-form.inc" -->
-    <!--#include virtual="/inc/article-map.inc" -->
+    @@include('inc/article-form.html')
+    @@include('inc/article-map.html')
     <article class="article info-agent">
         <header>
             <h2 class="h2">중개사정보</h2>
