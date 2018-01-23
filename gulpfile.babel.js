@@ -48,9 +48,9 @@ gulp.task('connect', () => {
 });
 
 gulp.task('js', () => {
-   return gulp.src(SRC.JS)
-       .pipe(uglify())
-       .pipe(gulp.dest(DIST.JS));
+    return gulp.src(SRC.JS)
+        .pipe(uglify())
+        .pipe(gulp.dest(DIST.JS));
 });
 
 gulp.task('data', () => {
@@ -122,5 +122,5 @@ gulp.task('watch', () => {
 });
 
 gulp.task('default', ['connect', 'clean', 'js', 'data', 'css', 'sass', 'html', 'amphtml:validate', 'img', 'watch'], () => {
-   return gutil.log('gulp is running');
+    return gutil.log('gulp is running');
 });
